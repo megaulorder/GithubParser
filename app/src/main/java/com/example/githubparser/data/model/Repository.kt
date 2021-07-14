@@ -1,6 +1,5 @@
 package com.example.githubparser.data.model
 
 data class Repository(
-    val name: String,
-    var count: Int
+    val name: String
 )
