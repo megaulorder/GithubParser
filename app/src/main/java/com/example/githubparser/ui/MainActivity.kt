@@ -7,7 +7,9 @@ import androidx.fragment.app.commit
 import com.example.githubparser.R
 import com.example.githubparser.databinding.ActivityMainBinding
 import com.example.githubparser.ui.repository.RepositoryFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
