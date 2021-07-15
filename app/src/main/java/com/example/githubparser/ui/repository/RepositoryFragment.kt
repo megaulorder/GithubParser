@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.githubparser.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubparser.data.model.RepositoriesList
+import com.example.githubparser.data.model.Repository
 import com.example.githubparser.databinding.RepositoryFragmentBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,7 +15,10 @@ import retrofit2.Response
 
 class RepositoryFragment : Fragment() {
     private lateinit var binding: RepositoryFragmentBinding
+    private lateinit var adapter: RepositoryAdapter
     private lateinit var viewModel: RepositoryViewModel
+
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +33,7 @@ class RepositoryFragment : Fragment() {
 
         viewModel = RepositoryViewModel()
 
-        val textview = binding.name
+        val recyclerView = binding.repositoriesRecyclerview
 
         viewModel.repositoriesListCall.enqueue(object : Callback<RepositoriesList> {
             override fun onResponse(
@@ -37,14 +41,17 @@ class RepositoryFragment : Fragment() {
                 response: Response<RepositoriesList>
             ) {
                 if (response.isSuccessful) {
-                    textview.text =
-                        response.body()?.items?.joinToString(separator = "\n") { it -> it.name }
+                    linearLayoutManager =
+                        LinearLayoutManager(context)
+                    recyclerView.layoutManager = linearLayoutManager
+
+                    adapter = RepositoryAdapter(response.body()?.items as ArrayList<Repository>)
+                    recyclerView.adapter = adapter
                 }
             }
 
             override fun onFailure(call: Call<RepositoriesList>, t: Throwable) {
                 t.printStackTrace()
-                textview.text = R.string.network_error_message.toString()
             }
         })
     }
