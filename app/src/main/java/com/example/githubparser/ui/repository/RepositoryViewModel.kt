@@ -9,5 +9,6 @@ import javax.inject.Inject
 class RepositoryViewModel @Inject constructor(
     private val repositoryRepository: RepositoryRepository
 ) : ViewModel() {
-    val repositoriesListCall = repositoryRepository.parseJson()
+
+    val repositories = repositoryRepository.getRepositories()
 }

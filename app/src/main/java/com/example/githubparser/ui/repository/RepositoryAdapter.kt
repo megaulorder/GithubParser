@@ -8,15 +8,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubparser.data.model.Repository
 import com.example.githubparser.databinding.ItemRepositoryBinding
 
-class RepositoryAdapter(private val repositories: ArrayList<Repository>) :
+class RepositoryAdapter(private val listener: RepositoryItemListener) :
     RecyclerView.Adapter<ViewHolder>() {
+
+    interface RepositoryItemListener {
+        fun onClickedRepository()
+    }
+
+    private val repositories = ArrayList<Repository>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
         return ViewHolder(
-            ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            listener
         )
     }
 
@@ -26,9 +33,18 @@ class RepositoryAdapter(private val repositories: ArrayList<Repository>) :
     }
 
     override fun getItemCount(): Int = repositories.size
+
+    fun setItems(items: ArrayList<Repository>) {
+        this.repositories.clear()
+        this.repositories.addAll(items)
+        notifyDataSetChanged()
+    }
 }
 
-class ViewHolder(private val itemBinding: ItemRepositoryBinding) :
+class ViewHolder(
+    private val itemBinding: ItemRepositoryBinding,
+    private val listener: RepositoryAdapter.RepositoryItemListener
+) :
     RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
     private var repository: Repository? = null
 

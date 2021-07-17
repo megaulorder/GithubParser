@@ -1,14 +1,11 @@
 package com.example.githubparser.data.repository
 
-import com.example.githubparser.data.api.RepositoryApi
-import com.example.githubparser.data.model.RepositoriesList
-import retrofit2.Call
+import com.example.githubparser.data.api.RepositoryDataSource
+import com.example.githubparser.utils.getData
 import javax.inject.Inject
 
 class RepositoryRepository @Inject constructor(
-    private val repositoryApi: RepositoryApi
+    private val repositoryDataSource: RepositoryDataSource
 ) {
-    fun parseJson(): Call<RepositoriesList> {
-        return repositoryApi.getRepositories()
-    }
+    fun getRepositories() = getData { repositoryDataSource.getRepositories() }
 }
