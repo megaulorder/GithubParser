@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
