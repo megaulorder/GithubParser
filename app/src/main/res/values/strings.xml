@@ -6,8 +6,10 @@
     <string name="data_error_message">API execution failed</string>
 
     <string name="hello">Hello</string>
-    <string name="username_label">Username</string>
+    <string name="description">Description:</string>
+    <string name="language">Language:</string>
+    <string name="repositories">Repositories</string>
+    <string name="repository_details">Repository details</string>
     <string name="button_message">Ебош</string>
-    <string name="username_placeholder">Enter a username</string>
 
 </resources>

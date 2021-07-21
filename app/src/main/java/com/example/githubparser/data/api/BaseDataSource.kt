@@ -8,6 +8,9 @@ abstract class BaseDataSource {
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call()
+            println("start#####")
+            println(response.raw().request.url)
+            println("end#####")
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) return Resource.success(body)

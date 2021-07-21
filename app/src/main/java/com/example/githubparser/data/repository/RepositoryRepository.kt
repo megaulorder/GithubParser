@@ -8,4 +8,6 @@ class RepositoryRepository @Inject constructor(
     private val repositoryDataSource: RepositoryDataSource
 ) {
     fun getRepositories() = getData { repositoryDataSource.getRepositories() }
+    fun getRepository(name: String) =
+        getData { repositoryDataSource.getRepository(name) }
 }
