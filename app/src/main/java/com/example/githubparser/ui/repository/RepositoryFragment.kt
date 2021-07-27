@@ -53,12 +53,12 @@ class RepositoryFragment : Fragment(), RepositoryAdapter.RepositoryItemListener 
         })
     }
 
-    override fun onClickedRepository(name: String?) {
-        println("Navigating to $name")
+    override fun onClickedRepository(login: String, repositoryName: String) {
+        println("Navigating to $login/$repositoryName")
 
         findNavController().navigate(
             R.id.action_repository_fragment_to_repository_detail_fragment,
-            bundleOf("name" to name)
+            bundleOf("login" to login, "repositoryName" to repositoryName)
         )
     }
 }

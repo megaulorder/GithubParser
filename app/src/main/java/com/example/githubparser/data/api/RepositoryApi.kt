@@ -11,8 +11,9 @@ interface RepositoryApi {
     @GET("search/repositories?q=user:megaulorder&sort=updated&order=desc")
     suspend fun getAllRepositories(): Response<RepositoriesList>
 
-    @GET("repos/megaulorder/{name}")
+    @GET("repos/{login}/{name}")
     suspend fun getRepository(
-        @Path("name", encoded = true) name: String
+        @Path("login", encoded = true) login: String,
+        @Path("name", encoded = true) repositoryName: String,
     ): Response<Repository>
 }

@@ -6,6 +6,6 @@ class RepositoryDataSource @Inject constructor(
     private val repositoryApi: RepositoryApi
 ) : BaseDataSource() {
     suspend fun getRepositories() = getResult { repositoryApi.getAllRepositories() }
-    suspend fun getRepository(name: String) =
-        getResult { repositoryApi.getRepository(name) }
+    suspend fun getRepository(login: String, repositoryName: String) =
+        getResult { repositoryApi.getRepository(login, repositoryName) }
 }

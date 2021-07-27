@@ -12,7 +12,7 @@ class RepositoryAdapter(private val listener: RepositoryItemListener) :
     RecyclerView.Adapter<ViewHolder>() {
 
     interface RepositoryItemListener {
-        fun onClickedRepository(fullName: String?)
+        fun onClickedRepository(login: String, repositoryName: String)
     }
 
     private val repositories = ArrayList<Repository>()
@@ -54,7 +54,7 @@ class ViewHolder(
 
     override fun onClick(v: View) {
         Log.d("RecyclerView", "${itemBinding.name.text} clicked")
-        listener.onClickedRepository(repository?.name)
+        listener.onClickedRepository(repository!!.owner.login, repository!!.name)
     }
 
     fun bindRepository(repository: Repository) {

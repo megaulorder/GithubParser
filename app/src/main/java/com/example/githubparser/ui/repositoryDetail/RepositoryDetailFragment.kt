@@ -28,15 +28,12 @@ class RepositoryDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.getString("name")?.let { viewModel.start(it) }
+        viewModel.start(arguments?.getString("login")!!, arguments?.getString("repositoryName")!!)
         setupObservers()
     }
 
     private fun setupObservers() {
         viewModel.repository.observe(viewLifecycleOwner, Observer {
-            println("@@@@@@@@@@@@@@")
-            println("${it.status} ${it.message}")
-
             if (it.status == Resource.Status.SUCCESS)
                 bindCharacter(it.data!!)
             else if (it.status == Resource.Status.ERROR)
