@@ -1,5 +1,6 @@
 package com.example.githubparser.data.api
 
+import android.util.Log
 import com.example.githubparser.utils.Resource
 import retrofit2.Response
 
@@ -8,9 +9,7 @@ abstract class BaseDataSource {
     protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call()
-            println("start#####")
-            println(response.raw().request.url)
-            println("end#####")
+            Log.d("Response URL", response.raw().request.url.toString())
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) return Resource.success(body)

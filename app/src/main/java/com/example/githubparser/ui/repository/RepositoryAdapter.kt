@@ -60,5 +60,6 @@ class ViewHolder(
     fun bindRepository(repository: Repository) {
         this.repository = repository
         itemBinding.name.text = repository.name
+        itemBinding.owner.text = repository.owner.login
     }
 }

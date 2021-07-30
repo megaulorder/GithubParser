@@ -5,11 +5,14 @@ import com.example.githubparser.data.model.Repository
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RepositoryApi {
 
-    @GET("search/repositories?q=user:megaulorder&sort=updated&order=desc")
-    suspend fun getAllRepositories(): Response<RepositoriesList>
+    @GET("search/repositories")
+    suspend fun getAllRepositories(
+        @Query("q", encoded = true) query: String
+    ): Response<RepositoriesList>
 
     @GET("repos/{login}/{name}")
     suspend fun getRepository(

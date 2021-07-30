@@ -2,6 +2,7 @@ package com.example.githubparser.ui.repositoryDetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.githubparser.data.model.Repository
 import com.example.githubparser.databinding.RepositoryDetailFragmentBinding
 import com.example.githubparser.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class RepositoryDetailFragment : Fragment() {
@@ -42,7 +44,6 @@ class RepositoryDetailFragment : Fragment() {
     }
 
     private fun bindCharacter(repository: Repository) {
-        println("!! Repository $repository")
         binding.name.text = repository.name
         binding.description.text = repository.description
         binding.language.text = repository.language
