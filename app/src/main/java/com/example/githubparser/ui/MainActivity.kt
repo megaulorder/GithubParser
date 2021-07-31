@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.toolbar.inflateMenu(R.menu.menu_main)
+//        binding.toolbar.menu.findItem(R.id.search).expandActionView()
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val search: SearchView =

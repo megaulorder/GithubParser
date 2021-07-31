@@ -8,7 +8,7 @@ data class Repository(
     @SerializedName("full_name")
     val fullName: String,
 
-    val description: String,
-    val language: String,
+    val description: String?,
+    val language: String?,
     val owner: Owner
 )

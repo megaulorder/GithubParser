@@ -17,7 +17,7 @@ class RepositoryViewModel @Inject constructor(
     private val _query = MutableLiveData<String?>()
 
     private val _repositories = _query.switchMap { query ->
-            repositoryRepository.getRepositories(query!!)
+        repositoryRepository.getRepositories(query!!)
     }
 
     val repositories: LiveData<Resource<RepositoriesList?>> = _repositories
