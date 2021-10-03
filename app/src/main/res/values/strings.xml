@@ -14,6 +14,6 @@
     <string name="repository_details">Repository details</string>
     <string name="button_message">Ебош</string>
     <string name="search_title">Search repositories</string>
-    <string name="no_data">No data</string>
+    <string name="no_results">No results 😓</string>
 
 </resources>
