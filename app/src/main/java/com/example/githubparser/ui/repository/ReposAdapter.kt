@@ -14,7 +14,7 @@ class ReposAdapter : PagingDataAdapter<Repo, RepoViewHolder>(REPO_COMPARATOR) {
 	override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
 		val repoItem = getItem(position)
 		if (repoItem != null) {
-			holder.bind(repoItem)
+			holder.showRepoData(repoItem)
 		}
 	}
 

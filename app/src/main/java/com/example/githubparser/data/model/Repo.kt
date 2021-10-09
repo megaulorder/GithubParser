@@ -12,5 +12,6 @@ data class Repo(
 )
 
 data class Owner(
-	val login: String
+	val login: String,
+	@SerializedName("avatar_url") val avatar: String,
 )
