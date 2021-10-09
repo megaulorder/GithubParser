@@ -1,35 +1,21 @@
 package com.example.githubparser.data.repository
 
 import android.util.Log
-import com.example.githubparser.data.api.GithubService
-import com.example.githubparser.data.api.ReposSearchResult
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.example.githubparser.data.model.Repo
+import com.example.githubparser.data.service.GithubApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import retrofit2.HttpException
-import java.io.IOException
 
-class ReposRepository(private val service: GithubService) {
+class ReposRepository(private val service: GithubApi) {
 
-	private val searchResults = MutableSharedFlow<ReposSearchResult>(replay = 1)
-
-	suspend fun getSearchResultStream(query: String): Flow<ReposSearchResult> {
+	fun search(query: String): Flow<PagingData<Repo>> {
 		Log.d("GithubRepository", "ReposRepository: New query: $query")
-		requestData(query)
 
-		return searchResults
-	}
-
-	private suspend fun requestData(query: String) {
-
-		try {
-			val response = service.searchRepos(query)
-			Log.d("GithubRepository", "ReposRepository: response $response")
-			val repos = response.items
-			searchResults.emit(ReposSearchResult.Success(repos))
-		} catch (exception: IOException) {
-			searchResults.emit(ReposSearchResult.Error(exception))
-		} catch (exception: HttpException) {
-			searchResults.emit(ReposSearchResult.Error(exception))
-		}
+		return Pager(
+			config = PagingConfig(pageSize = ITEMS_PER_PAGE, enablePlaceholders = false),
+			pagingSourceFactory = { GithubPagingSource(service, query) }
+		).flow
 	}
 }

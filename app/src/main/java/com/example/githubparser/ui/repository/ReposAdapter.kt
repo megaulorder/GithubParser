@@ -1,58 +1,30 @@
 package com.example.githubparser.ui.repository
 
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.example.githubparser.data.model.Repo
-import com.example.githubparser.databinding.ItemRepositoryBinding
 
-class RepositoryAdapter: RecyclerView.Adapter<ViewHolder>() {
+class ReposAdapter : PagingDataAdapter<Repo, RepoViewHolder>(REPO_COMPARATOR) {
 
-	private val repositories = ArrayList<Repo>()
-
-	override fun onCreateViewHolder(
-		parent: ViewGroup,
-		viewType: Int
-	): ViewHolder {
-		return ViewHolder(
-			ItemRepositoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-		)
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
+		return RepoViewHolder.create(parent)
 	}
 
-	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-		val itemRepository = repositories[position]
-		holder.bindRepository(itemRepository)
+	override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
+		val repoItem = getItem(position)
+		if (repoItem != null) {
+			holder.bind(repoItem)
+		}
 	}
 
-	override fun getItemCount(): Int = repositories.size
+	companion object {
+		private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Repo>() {
+			override fun areItemsTheSame(oldItem: Repo, newItem: Repo): Boolean =
+				oldItem.fullName == newItem.fullName
 
-	fun setItems(items: ArrayList<Repo>) {
-		Log.d("GithubRepository", "Adapter: repos found: ${items.size}")
-		this.repositories.clear()
-		this.repositories.addAll(items)
-		notifyDataSetChanged()
-	}
-}
-
-class ViewHolder(
-	private val itemBinding: ItemRepositoryBinding
-) :
-	RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {
-	private var repo: Repo? = null
-
-	init {
-		itemBinding.root.setOnClickListener(this)
-	}
-
-	override fun onClick(v: View) {
-		TODO()
-	}
-
-	fun bindRepository(repo: Repo) {
-		this.repo = repo
-		itemBinding.name.text = repo.name
-		itemBinding.owner.text = repo.owner.login
+			override fun areContentsTheSame(oldItem: Repo, newItem: Repo): Boolean =
+				oldItem == newItem
+		}
 	}
 }

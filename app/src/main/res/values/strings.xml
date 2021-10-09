@@ -12,8 +12,9 @@
     <string name="language">Language:</string>
     <string name="repositories">Repositories</string>
     <string name="repository_details">Repository details</string>
-    <string name="button_message">Ебош</string>
     <string name="search_title">Search repositories</string>
     <string name="no_results">No results 😓</string>
-
+    <string name="search_hint">Enter repository name…</string>
+    <string name="unknown">\?</string>
+    <string name="loading">Loading</string>
 </resources>
