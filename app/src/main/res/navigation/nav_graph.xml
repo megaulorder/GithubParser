@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@+id/repositoryFragment">
+<navigation
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/nav_graph"
+	app:startDestination="@+id/repos">
 
-    <fragment
-        android:id="@+id/repositoryFragment"
-        android:label="@string/repositories"
-        android:name="com.example.githubparser.ui.repository.ReposFragment"
-        tools:layout="@layout/repos_fragment">
-        <action 
-            android:id="@+id/action_repository_fragment_to_repository_detail_fragment"
-            app:destination="@id/repositoryDetailFragment"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/repositoryDetailFragment"
-        android:label="@string/repository_details"
-        android:name="com.example.githubparser.ui.repositoryDetail.RepositoryDetailFragment"
-        tools:layout="@layout/repo_detail_fragment">
-    </fragment>
+	<include app:graph="@navigation/repos" />
+	<include app:graph="@navigation/profile"/>
 
 </navigation>

@@ -7,13 +7,15 @@
 
     <string name="hello">Hello</string>
     <string name="repository">Repository</string>
-    <string name="description">Description:</string>
+    <string name="description">Profile descriptions should be clear, concise, and descriptive.</string>
     <string name="language">Language:</string>
     <string name="repositories">Repositories</string>
     <string name="repository_details">Repository details</string>
+    <string name="profile">Profile</string>
     <string name="search_title">Search repositories</string>
     <string name="no_results">No results 😓</string>
     <string name="search_hint">Enter repository name…</string>
     <string name="unknown">\?</string>
     <string name="loading">Loading</string>
+    <string name="retry">Retry</string>
 </resources>

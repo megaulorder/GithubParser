@@ -1,4 +1,4 @@
-package com.example.githubparser.ui.repository
+package com.example.githubparser.ui.repos
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.githubparser.R
 import com.example.githubparser.data.model.Repo
 
-class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class RepoViewHolder(view: View, listener: ReposAdapter.RepoItemListener?) :
+	RecyclerView.ViewHolder(view) {
 	private val name: TextView = view.findViewById(R.id.name)
 	private val description: TextView = view.findViewById(R.id.description)
 	private val avatar: ImageView = view.findViewById(R.id.avatar)
@@ -19,8 +20,9 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 	private var repo: Repo? = null
 
 	init {
-		view.setOnClickListener {
-			Log.d("Github Repository", "Clicked $it !")
+		itemView.setOnClickListener {
+			listener?.onRepoClicked()
+			Log.d("GithubRepository", "Clicked $it")
 		}
 	}
 
@@ -43,10 +45,10 @@ class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 	}
 
 	companion object {
-		fun create(parent: ViewGroup): RepoViewHolder {
+		fun create(parent: ViewGroup, listener: ReposAdapter.RepoItemListener?): RepoViewHolder {
 			val view = LayoutInflater.from(parent.context)
-				.inflate(R.layout.item_repository, parent, false)
-			return RepoViewHolder(view)
+				.inflate(R.layout.item_repo, parent, false)
+			return RepoViewHolder(view, listener)
 		}
 	}
 }

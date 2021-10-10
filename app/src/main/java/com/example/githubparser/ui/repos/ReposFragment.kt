@@ -1,14 +1,13 @@
-package com.example.githubparser.ui.repository
+package com.example.githubparser.ui.repos
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.LoadState
 import com.example.githubparser.App
 import com.example.githubparser.databinding.ReposFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -36,29 +35,40 @@ class ReposFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		setupRecyclerView()
-		bindVM()
+		bindViewModel()
 	}
 
-	private fun setupRecyclerView() {
+	private fun bindViewModel() {
 		adapter = ReposAdapter()
 
-		binding.list.layoutManager = LinearLayoutManager(context)
-		binding.list.adapter = adapter
-	}
+		with(binding) {
+			with(adapter) {
 
-	fun bindVM() {
-		with(viewModel) {
-			viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-				reposFlow.collectLatest { pagingData ->
-					adapter.submitData(pagingData)
+				list.adapter = withLoadStateHeaderAndFooter(
+					header = ReposLoadStateAdapter(this),
+					footer = ReposLoadStateAdapter(this)
+				)
+
+				refreshLayout.setOnRefreshListener { refresh() }
+
+				with(viewModel) {
+					viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+						reposFlow.collectLatest { pagingData ->
+//							val isListEmpty = pagingData.refresh is LoadState.NotLoading && adapter.itemCount == 0
+//							emptyList.isVisible = isListEmpty
+//							list.isVisible = !isListEmpty
+
+							submitData(pagingData)
+						}
+					}
+
+					viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+						loadStateFlow.collectLatest {
+							refreshLayout.isRefreshing = it.refresh is LoadState.Loading
+						}
+					}
 				}
 			}
 		}
-	}
-
-	private fun showEmptyList(show: Boolean) {
-		binding.emptyList.isVisible = show
-		binding.list.isVisible = !show
 	}
 }
