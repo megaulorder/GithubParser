@@ -2,9 +2,6 @@
     <string name="app_name">GithubParser</string>
     <string name="action_settings">Settings</string>
 
-    <string name="network_error_message">Cannot connect</string>
-    <string name="data_error_message">API execution failed</string>
-
     <string name="hello">Hello</string>
     <string name="repository">Repository</string>
     <string name="description">Profile descriptions should be clear, concise, and descriptive.</string>
@@ -18,4 +15,5 @@
     <string name="unknown">\?</string>
     <string name="loading">Loading</string>
     <string name="retry">Retry</string>
+    <string name="network_error_message">Network error 😳</string>
 </resources>

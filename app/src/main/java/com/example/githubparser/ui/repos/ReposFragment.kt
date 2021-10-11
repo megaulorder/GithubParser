@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -58,20 +59,34 @@ class ReposFragment : Fragment(), ReposAdapter.RepoItemListener {
 
 				refreshLayout.setOnRefreshListener { refresh() }
 
+				retryButton.setOnClickListener { adapter.retry() }
+
 				with(viewModel) {
 					viewLifecycleOwner.lifecycleScope.launchWhenCreated {
 						reposFlow.collectLatest { pagingData ->
-//							val isListEmpty = pagingData.refresh is LoadState.NotLoading && adapter.itemCount == 0
-//							emptyList.isVisible = isListEmpty
-//							list.isVisible = !isListEmpty
-
 							submitData(pagingData)
 						}
 					}
 
 					viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-						loadStateFlow.collectLatest {
-							refreshLayout.isRefreshing = it.refresh is LoadState.Loading
+						loadStateFlow.collectLatest { loadState ->
+							refreshLayout.isRefreshing = loadState.refresh is LoadState.Loading
+
+							val isListEmpty =
+								loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+							emptyList.isVisible = isListEmpty
+							list.isVisible = !isListEmpty
+
+							val isNetworkError =
+								loadState.refresh is LoadState.Error && adapter.itemCount == 0
+							errorMessage.isVisible = isNetworkError
+							retryButton.isVisible = isNetworkError
+							list.isVisible = !isNetworkError
+
+							Log.d(
+								"GithubRepository",
+								"ReposFragment: Load state: ${loadState.refresh} list visible: ${list.isVisible}"
+							)
 						}
 					}
 				}

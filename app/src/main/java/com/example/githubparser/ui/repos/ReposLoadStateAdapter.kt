@@ -1,5 +1,6 @@
 package com.example.githubparser.ui.repos
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -40,9 +41,12 @@ class ReposLoadStateViewHolder(
 		with(binding) {
 			progressBar.isVisible = loadState is LoadState.Loading
 			retryButton.isVisible = loadState is LoadState.Error
-			errorMessage.isVisible =
-				!(loadState as? LoadState.Error)?.error?.message.isNullOrBlank()
-			errorMessage.text = (loadState as? LoadState.Error)?.error?.message
+			errorMessage.isVisible = loadState is LoadState.Error
+			if (loadState is LoadState.Error) {
+				errorMessage.text = loadState.error.localizedMessage
+			}
+
+			Log.d("GithubRepository", "LoadStateAdapter: Load state: $loadState")
 		}
 	}
 }
