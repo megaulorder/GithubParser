@@ -1,18 +1,25 @@
 package com.example.githubparser.ui.repos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.githubparser.App
+import com.example.githubparser.R
+import com.example.githubparser.data.model.Repo
+import com.example.githubparser.databinding.ItemRepoBinding
 import com.example.githubparser.databinding.ReposFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
 
-class ReposFragment : Fragment() {
+class ReposFragment : Fragment(), ReposAdapter.RepoItemListener {
+
 	private lateinit var binding: ReposFragmentBinding
 	private lateinit var adapter: ReposAdapter
 	private lateinit var viewModel: ReposViewModel
@@ -39,7 +46,7 @@ class ReposFragment : Fragment() {
 	}
 
 	private fun bindViewModel() {
-		adapter = ReposAdapter()
+		adapter = ReposAdapter(this)
 
 		with(binding) {
 			with(adapter) {
@@ -70,5 +77,27 @@ class ReposFragment : Fragment() {
 				}
 			}
 		}
+	}
+
+	override fun onRepoClicked(binding: ItemRepoBinding, repo: Repo) {
+		val description = repo.description?.let { repo.description } ?: ""
+
+		val bundle = bundleOf(
+			NAME_KEY to repo.fullName,
+			DESCRIPTION_KEY to description,
+			AVATAR_URL_KEY to repo.owner.avatarUrl
+		)
+
+		Log.d("GithubRepository", "Repos fragment: repo clicked")
+
+		findNavController().navigate(
+			R.id.action_repos_fragment_to_repo_detail_fragment, bundle
+		)
+	}
+
+	companion object {
+		const val NAME_KEY = "name"
+		const val DESCRIPTION_KEY = "description"
+		const val AVATAR_URL_KEY = "avatarUrl"
 	}
 }

@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class Repo(
 	val id: Long,
-	val name: String,
 	@SerializedName("full_name") val fullName: String,
 	val description: String?,
 	val language: String?,
@@ -13,5 +12,5 @@ data class Repo(
 
 data class Owner(
 	val login: String,
-	@SerializedName("avatar_url") val avatar: String,
+	@SerializedName("avatar_url") val avatarUrl: String,
 )

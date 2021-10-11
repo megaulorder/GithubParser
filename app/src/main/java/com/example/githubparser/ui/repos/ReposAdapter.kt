@@ -1,19 +1,24 @@
 package com.example.githubparser.ui.repos
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.githubparser.data.model.Repo
+import com.example.githubparser.databinding.ItemRepoBinding
 
-class ReposAdapter : PagingDataAdapter<Repo, RepoViewHolder>(REPO_COMPARATOR) {
+class ReposAdapter(private val listener: RepoItemListener) :
+	PagingDataAdapter<Repo, ReposViewHolder>(REPO_COMPARATOR) {
 
-	var repoItemListener: RepoItemListener? = null
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+		ReposViewHolder(
+			ItemRepoBinding
+				.inflate(
+					LayoutInflater.from(parent.context), parent, false
+				), listener
+		)
 
-	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
-		return RepoViewHolder.create(parent, repoItemListener)
-	}
-
-	override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
+	override fun onBindViewHolder(holder: ReposViewHolder, position: Int) {
 		val repoItem = getItem(position)
 		if (repoItem != null) {
 			holder.showRepoData(repoItem)
@@ -31,6 +36,6 @@ class ReposAdapter : PagingDataAdapter<Repo, RepoViewHolder>(REPO_COMPARATOR) {
 	}
 
 	interface RepoItemListener {
-		fun onRepoClicked()
+		fun onRepoClicked(binding: ItemRepoBinding, repo: Repo)
 	}
 }

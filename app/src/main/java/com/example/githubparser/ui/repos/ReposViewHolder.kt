@@ -1,28 +1,28 @@
 package com.example.githubparser.ui.repos
 
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubparser.R
 import com.example.githubparser.data.model.Repo
+import com.example.githubparser.databinding.ItemRepoBinding
 
-class RepoViewHolder(view: View, listener: ReposAdapter.RepoItemListener?) :
-	RecyclerView.ViewHolder(view) {
-	private val name: TextView = view.findViewById(R.id.name)
-	private val description: TextView = view.findViewById(R.id.description)
-	private val avatar: ImageView = view.findViewById(R.id.avatar)
+class ReposViewHolder(binding: ItemRepoBinding, listener: ReposAdapter.RepoItemListener) :
+	RecyclerView.ViewHolder(binding.root) {
 
-	private var repo: Repo? = null
+	private val name: TextView = binding.name
+	private val description: TextView = binding.description
+	private val avatar: ImageView = binding.avatar
+
+	private lateinit var repo: Repo
 
 	init {
 		itemView.setOnClickListener {
-			listener?.onRepoClicked()
-			Log.d("GithubRepository", "Clicked $it")
+			listener.onRepoClicked(binding, repo)
+			Log.d("GithubRepository", "ReposViewHolder: Clicked ${repo.fullName}")
 		}
 	}
 
@@ -31,7 +31,7 @@ class RepoViewHolder(view: View, listener: ReposAdapter.RepoItemListener?) :
 		name.text = repo.fullName
 
 		Glide.with(avatar)
-			.load(repo.owner.avatar)
+			.load(repo.owner.avatarUrl)
 			.placeholder(R.drawable.ic_avatar_placeholder)
 			.into(avatar)
 
@@ -42,13 +42,5 @@ class RepoViewHolder(view: View, listener: ReposAdapter.RepoItemListener?) :
 			descriptionVisibility = View.VISIBLE
 		}
 		description.visibility = descriptionVisibility
-	}
-
-	companion object {
-		fun create(parent: ViewGroup, listener: ReposAdapter.RepoItemListener?): RepoViewHolder {
-			val view = LayoutInflater.from(parent.context)
-				.inflate(R.layout.item_repo, parent, false)
-			return RepoViewHolder(view, listener)
-		}
 	}
 }
