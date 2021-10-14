@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.githubparser"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -68,7 +68,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
 
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha01'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha10'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -86,11 +86,18 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 
     //navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:1.4.0-alpha01"
-    implementation "androidx.navigation:navigation-ui-ktx:2.4.0-alpha01"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.0-alpha10"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.0-alpha10"
 
     //paging
     implementation "androidx.paging:paging-runtime-ktx:3.0.1"
+
+    //room
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0-alpha04"
+    implementation "androidx.room:room-runtime:2.4.0-alpha05"
+    kapt "androidx.room:room-compiler:2.4.0-alpha05"
+    implementation "androidx.room:room-ktx:2.4.0-alpha05"
+    implementation "androidx.room:room-paging:2.4.0-beta01"
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'

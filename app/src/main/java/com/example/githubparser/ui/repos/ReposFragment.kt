@@ -70,22 +70,23 @@ class ReposFragment : Fragment(), ReposAdapter.RepoItemListener {
 
 					viewLifecycleOwner.lifecycleScope.launchWhenCreated {
 						loadStateFlow.collectLatest { loadState ->
-							refreshLayout.isRefreshing = loadState.refresh is LoadState.Loading
+							refreshLayout.isRefreshing =
+								loadState.mediator?.refresh is LoadState.Loading
 
 							val isListEmpty =
-								loadState.refresh is LoadState.NotLoading && adapter.itemCount == 0
+								loadState.mediator?.refresh is LoadState.NotLoading && adapter.itemCount == 0
 							emptyList.isVisible = isListEmpty
 							list.isVisible = !isListEmpty
 
 							val isNetworkError =
-								loadState.refresh is LoadState.Error && adapter.itemCount == 0
+								loadState.mediator?.refresh is LoadState.Error && adapter.itemCount == 0
 							errorMessage.isVisible = isNetworkError
 							retryButton.isVisible = isNetworkError
 							list.isVisible = !isNetworkError
 
 							Log.d(
 								"GithubRepository",
-								"ReposFragment: Load state: ${loadState.refresh} list visible: ${list.isVisible}"
+								"ReposFragment: Load state: ${loadState.mediator?.refresh} list visible: ${list.isVisible}"
 							)
 						}
 					}
