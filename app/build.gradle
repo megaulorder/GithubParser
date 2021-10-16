@@ -3,15 +3,30 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.kapt'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-android-extensions'
 }
 
 android {
-    compileSdkVersion 31
+    signingConfigs {
+		debug {
+			storeFile file('debug.jks')
+			storePassword 'android'
+			keyAlias 'debug-key'
+			keyPassword 'android'
+		}
+        release {
+			storeFile file('release.jks')
+			storePassword 'lolkekcheburek'
+			keyAlias 'key-release'
+			keyPassword 'lolkekcheburek'
+		}
+	}
+	compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.githubparser"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
@@ -24,6 +39,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			signingConfig signingConfigs.release
+		}
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {

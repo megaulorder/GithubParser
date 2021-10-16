@@ -83,11 +83,6 @@ class ReposFragment : Fragment(), ReposAdapter.RepoItemListener {
 							errorMessage.isVisible = isNetworkError
 							retryButton.isVisible = isNetworkError
 							list.isVisible = !isNetworkError
-
-							Log.d(
-								"GithubRepository",
-								"ReposFragment: Load state: ${loadState.mediator?.refresh} list visible: ${list.isVisible}"
-							)
 						}
 					}
 				}

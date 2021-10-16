@@ -16,4 +16,6 @@
     <string name="loading">Loading</string>
     <string name="retry">Retry</string>
     <string name="network_error_message">Network error 😳</string>
+	<string name="debug">Дебаг-консоль</string>
+	<string name="ok">OK</string>
 </resources>
