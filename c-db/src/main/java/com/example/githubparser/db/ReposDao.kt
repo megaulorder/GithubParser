@@ -1,11 +1,10 @@
-package com.example.githubparser.data.db
+package com.example.githubparser.db
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.githubparser.data.model.Repo
 
 @Dao
 interface ReposDao {

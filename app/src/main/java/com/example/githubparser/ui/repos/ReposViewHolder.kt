@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubparser.R
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.Repo
 import com.example.githubparser.databinding.ItemRepoBinding
 
 class ReposViewHolder(binding: ItemRepoBinding, listener: ReposAdapter.RepoItemListener) :

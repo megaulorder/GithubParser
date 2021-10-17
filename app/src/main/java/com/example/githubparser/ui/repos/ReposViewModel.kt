@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.Repo
 import com.example.githubparser.data.repository.ReposRepository
 import kotlinx.coroutines.flow.Flow
 

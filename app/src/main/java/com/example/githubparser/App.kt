@@ -1,7 +1,7 @@
 package com.example.githubparser
 
 import android.app.Application
-import com.example.githubparser.data.db.ReposDatabase
+import com.example.githubparser.db.ReposDatabase
 import com.example.githubparser.data.repository.ReposRepository
 import com.example.githubparser.data.service.GithubApi
 

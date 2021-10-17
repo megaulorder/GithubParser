@@ -1,5 +1,6 @@
-package com.example.githubparser.data.model
+package com.example.githubparser.data.service
 
+import com.example.githubparser.db.Repo
 import com.google.gson.annotations.SerializedName
 
 data class GithubResponse(

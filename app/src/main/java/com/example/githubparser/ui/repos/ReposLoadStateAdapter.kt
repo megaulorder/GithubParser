@@ -9,7 +9,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubparser.R
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.Repo
 import com.example.githubparser.databinding.ItemNetworkStateBinding
 
 class ReposLoadStateAdapter<viewHolder : RecyclerView.ViewHolder>(

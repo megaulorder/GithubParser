@@ -5,9 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.githubparser.data.db.PageKeys
-import com.example.githubparser.data.db.ReposDatabase
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.PageKeys
+import com.example.githubparser.db.ReposDatabase
+import com.example.githubparser.db.Repo
 import com.example.githubparser.data.service.GithubApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -49,7 +49,11 @@ class ReposRemoteMediator(
 				val prevKey = if (page == 1) null else page - 1
 				val nextKey = if (endOfPaginationReached) null else page + 1
 				val keys = repos.map {
-					PageKeys(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
+					PageKeys(
+						repoId = it.id,
+						prevKey = prevKey,
+						nextKey = nextKey
+					)
 				}
 				reposDatabase.pageKeysDao().insertAll(keys)
 				reposDatabase.reposDao().insertAll(repos)

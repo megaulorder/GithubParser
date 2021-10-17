@@ -1,4 +1,4 @@
-package com.example.githubparser.data.model
+package com.example.githubparser.db
 
 import androidx.room.*
 import com.google.gson.annotations.SerializedName

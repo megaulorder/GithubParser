@@ -5,8 +5,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.githubparser.data.db.ReposDatabase
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.ReposDatabase
+import com.example.githubparser.db.Repo
 import com.example.githubparser.data.service.GithubApi
 import kotlinx.coroutines.flow.Flow
 

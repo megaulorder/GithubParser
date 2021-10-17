@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.githubparser.App
 import com.example.githubparser.R
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.Repo
 import com.example.githubparser.databinding.ItemRepoBinding
 import com.example.githubparser.databinding.ReposFragmentBinding
 import kotlinx.coroutines.flow.collectLatest

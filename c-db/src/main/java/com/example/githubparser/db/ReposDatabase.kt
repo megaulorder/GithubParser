@@ -1,10 +1,9 @@
-package com.example.githubparser.data.db
+package com.example.githubparser.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.githubparser.data.model.Repo
 
 @Database(
 	entities = [Repo::class, PageKeys::class],

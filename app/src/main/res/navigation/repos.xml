@@ -20,9 +20,5 @@
         android:label="@string/repository_details"
         android:name="com.example.githubparser.ui.repos.detail.RepoDetailFragment"
         tools:layout="@layout/repo_detail_fragment">
-<!--        <argument-->
-<!--            android:name="repo"-->
-<!--            app:nullable="false"-->
-<!--            app:argType="com.example.githubparser.data.model.Repo" />-->
     </fragment>
 </navigation>

@@ -1,6 +1,5 @@
 package com.example.githubparser.data.service
 
-import com.example.githubparser.data.model.GithubResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

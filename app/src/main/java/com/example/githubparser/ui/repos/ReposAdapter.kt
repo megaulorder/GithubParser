@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.example.githubparser.data.model.Repo
+import com.example.githubparser.db.Repo
 import com.example.githubparser.databinding.ItemRepoBinding
 
 class ReposAdapter(private val listener: RepoItemListener) :

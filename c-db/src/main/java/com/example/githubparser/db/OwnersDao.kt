@@ -1,11 +1,9 @@
-package com.example.githubparser.data.db
+package com.example.githubparser.db
 
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.example.githubparser.data.model.Owner
-import com.example.githubparser.data.model.OwnerWithRepos
 
 interface OwnersDao {
 
