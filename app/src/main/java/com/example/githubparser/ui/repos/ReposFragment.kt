@@ -24,7 +24,7 @@ class ReposFragment : Fragment(), ReposAdapter.RepoItemListener {
 	private lateinit var binding: ReposFragmentBinding
 	private lateinit var adapter: ReposAdapter
 	private lateinit var viewModel: ReposViewModel
-	private var query: String = "cats"
+	private var query: String = "cats" //TODO: get query from EditText
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,

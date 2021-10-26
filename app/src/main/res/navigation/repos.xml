@@ -10,7 +10,7 @@
         android:label="@string/repositories"
         android:name="com.example.githubparser.ui.repos.ReposFragment"
         tools:layout="@layout/repos_fragment">
-        <action 
+        <action
             android:id="@+id/action_repos_fragment_to_repo_detail_fragment"
             app:destination="@id/repoDetailFragment"/>
     </fragment>

@@ -25,11 +25,9 @@ class MainActivity : AppCompatActivity() {
 		) as NavHostFragment
 		navController = navHostFragment.navController
 
-		// Setup the bottom navigation view with navController
 		val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 		bottomNavigationView.setupWithNavController(navController)
 
-		// Setup the ActionBar with navController and 3 top level destinations
 		appBarConfiguration = AppBarConfiguration(
 			setOf(R.id.reposFragment, R.id.profileFragment)
 		)

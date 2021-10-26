@@ -61,7 +61,7 @@ class UnitTest {
 		// select the same item
 		navigation.selectedItemId = profile
 
-		// verify that listener has been notified of the click
+		// verify that listener has been notified of the tap again
 		verify(mockedListener, times(2))
 			.onNavigationItemSelected(navigation.menu.findItem(profile))
 
